@@ -16,6 +16,7 @@ namespace
         bool enabled = false;
         uint32 auraSpellId = 0;
         uint32 idleTimeMs = 300000;
+        bool autoRefresh = false;
         bool ignoreGameMasters = true;
         bool ignoreInCombat = false;
         bool ignoreBattlegrounds = true;
@@ -102,6 +103,7 @@ namespace
         sAFKAuraConfig.enabled = sConfigMgr->GetOption<bool>("AFKAura.Enable", false);
         sAFKAuraConfig.auraSpellId = sConfigMgr->GetOption<uint32>("AFKAura.AuraSpellId", 0);
         sAFKAuraConfig.idleTimeMs = sConfigMgr->GetOption<uint32>("AFKAura.IdleTimeSeconds", 300) * 1000;
+        sAFKAuraConfig.autoRefresh = sConfigMgr->GetOption<bool>("AFKAura.AutoRefresh", false);
         sAFKAuraConfig.ignoreGameMasters = sConfigMgr->GetOption<bool>("AFKAura.IgnoreGameMasters", true);
         sAFKAuraConfig.ignoreInCombat = sConfigMgr->GetOption<bool>("AFKAura.IgnoreInCombat", false);
         sAFKAuraConfig.ignoreBattlegrounds = sConfigMgr->GetOption<bool>("AFKAura.IgnoreBattlegrounds", true);
@@ -172,11 +174,14 @@ namespace
             if (state.idleMs < sAFKAuraConfig.idleTimeMs)
                 return;
 
-            if (!state.auraApplied)
+            bool const hasAura = player->HasAura(sAFKAuraConfig.auraSpellId);
+            if (!hasAura && (!state.auraApplied || sAFKAuraConfig.autoRefresh))
             {
                 if (player->AddAura(sAFKAuraConfig.auraSpellId, player))
                     state.auraApplied = true;
             }
+            else if (hasAura)
+                state.auraApplied = true;
 
             if (sAFKAuraConfig.setPlayerFlagAFK && !player->HasPlayerFlag(PLAYER_FLAGS_AFK))
             {

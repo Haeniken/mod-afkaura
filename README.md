@@ -6,6 +6,7 @@
 - аура включается только по внутреннему таймеру неактивности;
 - ручной `/afk` сам по себе ауру не включает;
 - по активности игрока аура снимается;
+- при `AFKAura.AutoRefresh = 1` аура автоматически перевешивается после окончания;
 - модуль не требует SQL и не требует core patch.
 
 ## Конфиг
@@ -15,6 +16,7 @@
 - `AFKAura.Enable`
 - `AFKAura.AuraSpellId`
 - `AFKAura.IdleTimeSeconds`
+- `AFKAura.AutoRefresh`
 - `AFKAura.IgnoreGameMasters`
 - `AFKAura.IgnoreInCombat`
 - `AFKAura.IgnoreBattlegrounds`
