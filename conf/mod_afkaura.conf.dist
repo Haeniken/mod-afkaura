@@ -1,0 +1,52 @@
+[worldserver]
+
+###################################################################################################
+#	AFK Aura
+###################################################################################################
+
+# Enable or disable automatic AFK aura handling.
+# Default: 1
+
+AFKAura.Enable = 1
+
+# Aura spell id applied after inactivity timeout.
+# 0 disables aura application until configured.
+# Default: 65745
+
+AFKAura.AuraSpellId = 65745
+
+# Idle time in seconds before aura is applied.
+# Default: 300
+
+AFKAura.IdleTimeSeconds = 300
+
+# Reapply aura automatically after it expires while player stays idle.
+# Default: 1
+
+AFKAura.AutoRefresh = 1
+
+# Do not apply AFK aura logic to game masters.
+# Default: 1
+
+AFKAura.IgnoreGameMasters = 1
+
+# Do not apply AFK aura logic while player is in combat.
+# Default: 0
+
+AFKAura.IgnoreInCombat = 0
+
+# Do not apply AFK aura logic in battlegrounds.
+# Default: 1
+
+AFKAura.IgnoreBattlegrounds = 1
+
+# Do not apply AFK aura logic while player is in flight.
+# Default: 1
+
+AFKAura.IgnoreFlight = 1
+
+# Also set PLAYER_FLAGS_AFK when timeout is reached.
+# Manual /afk does not trigger aura by itself.
+# Default: 0
+
+AFKAura.SetPlayerFlagAFK = 0
